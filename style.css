@@ -1,0 +1,100 @@
+/* ===== 1. COLORS & FONT: change the whole look here ===== */
+:root {
+  --bg: #FFFDE4;        /* page background (cream) */
+  --card: #C8DCDD;      /* highlight / card (light teal) */
+  --text: #2A2D2F;      /* main text (charcoal) */
+  --muted: #5d6468;     /* secondary text */
+  --accent: #29354F;    /* headings, buttons, lines (navy) */
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+/* ===== 2. BASE ===== */
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { background: var(--bg); color: var(--text); font: 17px/1.6 var(--font); }
+a { color: inherit; text-decoration: none; }
+main { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+section { padding: 80px 0; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* ===== 3. NAVBAR ===== */
+.nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(6px); transition: box-shadow .2s; }
+.nav.scrolled { box-shadow: 0 2px 12px rgba(41,53,79,.15); }
+.nav nav { display: flex; justify-content: flex-end; align-items: center; gap: 36px; padding: 16px 40px; font-size: 15px; }
+.nav nav a:not(.btn):hover, .nav nav a.active { color: var(--accent); font-weight: 700; }
+
+/* ===== 4. BUTTONS ===== */
+.btn { display: inline-block; padding: 9px 20px; border: 2px solid var(--accent); border-radius: 4px; color: var(--accent); font-size: 14px; font-weight: 500; transition: background .2s, color .2s; }
+.btn:hover { background: var(--accent); color: var(--bg); }
+.btn-solid { background: var(--accent); color: var(--bg); }
+.btn-solid:hover { background: var(--text); border-color: var(--text); }
+
+/* ===== 5. SIDE ICONS & EMAIL ===== */
+.side { position: fixed; bottom: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 20px; list-style: none; padding: 0; }
+.side::after { content: ""; width: 2px; height: 90px; background: var(--accent); }
+.side-left { left: 40px; }
+.side-right { right: 40px; }
+.side svg { width: 22px; height: 22px; fill: var(--accent); display: block; transition: transform .2s; }
+.side a:hover svg { transform: translateY(-3px); }
+.side-right a { writing-mode: vertical-rl; letter-spacing: .1em; font-size: 14px; color: var(--accent); transition: transform .2s; }
+.side-right a:hover { transform: translateY(-3px); }
+@media (max-width: 1100px) { .side { display: none; } }
+
+/* ===== 6. HERO ===== */
+.hero { padding: 90px 0 60px; }
+.hello { font-size: 20px; }
+.hero h1 { font-size: clamp(44px, 8vw, 76px); font-weight: 800; line-height: 1.1; color: var(--accent); }
+.hero h2 { font-size: clamp(30px, 5vw, 52px); font-weight: 400; margin-bottom: 28px; }
+.lead { max-width: 540px; color: var(--muted); }
+
+/* ===== 7. SECTION TITLES (with the line) ===== */
+.title { display: flex; align-items: center; gap: 20px; font-size: 26px; font-weight: 500; color: var(--accent); margin-bottom: 36px; }
+.title::after { content: ""; flex: 0 1 300px; height: 1px; background: var(--accent); opacity: .5; }
+
+/* ===== 8. ABOUT ===== */
+.about { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: start; }
+.about p { color: var(--muted); margin-bottom: 16px; }
+.about ul { padding-left: 20px; color: var(--muted); }
+.about li { margin-bottom: 8px; }
+.about strong { color: var(--text); }
+.photo { width: 100%; max-width: 280px; aspect-ratio: 1; object-fit: cover; border-radius: 4px; border: 2px solid var(--accent); box-shadow: 10px 10px 0 var(--card); }
+@media (max-width: 720px) { .about { grid-template-columns: 1fr; } .photo { max-width: 220px; } }
+
+/* ===== 9. EXPERIENCE (tabs) ===== */
+.jobs { display: flex; gap: 28px; }
+.job-tabs { display: flex; flex-direction: column; border-left: 2px solid var(--card); min-width: 190px; }
+.job-tabs button { font: inherit; font-size: 15px; text-align: left; background: none; border: 0; border-left: 3px solid transparent; margin-left: -2px; padding: 11px 18px; cursor: pointer; color: var(--text); transition: background .2s; }
+.job-tabs button:hover { background: var(--card); }
+.job-tabs button[aria-selected="true"] { border-left-color: var(--accent); background: var(--card); color: var(--accent); font-weight: 700; }
+.job-panel h4 { font-size: 18px; color: var(--accent); }
+.job-date { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+.job-panel ul { padding-left: 20px; color: var(--muted); font-size: 15px; }
+.job-panel li { margin-bottom: 8px; }
+@media (max-width: 720px) { .jobs { flex-direction: column; } .job-tabs { flex-direction: row; overflow-x: auto; border-left: 0; border-bottom: 2px solid var(--card); } .job-tabs button { border-left: 0; border-bottom: 3px solid transparent; margin: 0 0 -2px; white-space: nowrap; } .job-tabs button[aria-selected="true"] { border-bottom-color: var(--accent); } }
+
+/* ===== 10. PROJECT CARDS ===== */
+.projects { display: grid; gap: 24px; }
+.card { background: var(--card); border: 2px solid var(--accent); border-radius: 6px; padding: 28px; transition: transform .2s, opacity .2s; }
+.projects:hover .card:not(:hover) { opacity: .55; }  /* the other cards fade when hovering one */
+.card:hover { transform: translateY(-4px); }
+.card h4 { font-size: 22px; color: var(--accent); margin-bottom: 8px; }
+.card p { color: var(--text); font-size: 15px; margin-bottom: 14px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin-bottom: 22px; }
+.tags li { font-size: 13px; padding: 2px 10px; border-radius: 999px; background: var(--bg); color: var(--accent); }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.links .btn { padding: 7px 14px; font-size: 13px; }
+
+/* ===== 11. CERTIFICATIONS ===== */
+.certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.cert { display: block; border: 2px solid var(--accent); border-radius: 6px; padding: 20px; min-height: 200px; background: var(--card); transition: transform .2s; }
+.cert:hover { transform: translateY(-4px); }
+.cert img { width: 100%; height: 110px; object-fit: contain; margin-bottom: 12px; background: var(--bg); border-radius: 4px; }
+.cert strong { display: block; color: var(--accent); }
+.cert span { font-size: 14px; color: var(--muted); }
+
+/* ===== 12. CONTACT & FOOTER ===== */
+.contact { text-align: center; padding: 100px 0 60px; }
+.contact h3 { font-size: 34px; color: var(--accent); margin-bottom: 12px; }
+.contact p { color: var(--muted); max-width: 440px; margin: 0 auto 28px; }
+footer { text-align: center; padding: 40px 24px 60px; font-size: 14px; color: var(--muted); }
